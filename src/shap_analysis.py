@@ -91,24 +91,24 @@ def top_features(shap_values: shap.Explanation, n: int = 10) -> pd.DataFrame:
 
 
 def plot_shap_bar(shap_values: shap.Explanation, save_path: Path, max_display: int = 15) -> Path:
-    """Generate and save the SHAP summary bar plot (global feature importance)."""
+    """Generate and save the SHAP feature-importance bar plot (mean |SHAP|)."""
     plt.figure()
     shap.plots.bar(shap_values, max_display=max_display, show=False)
     plt.title("SHAP Feature Importance (Mean |SHAP value|)", fontsize=12, fontweight="bold")
     plt.tight_layout()
-    out = save_path / "11_shap_summary_bar.png"
-    plt.savefig(out, dpi=300, bbox_inches="tight")
+    out = save_path / "shap_feature_importance.png"
+    plt.savefig(out, dpi=200, bbox_inches="tight")
     plt.close()
     return out
 
 
 def plot_shap_beeswarm(shap_values: shap.Explanation, save_path: Path, max_display: int = 15) -> Path:
-    """Generate and save the SHAP beeswarm plot (impact + direction per feature)."""
+    """Generate and save the SHAP summary beeswarm plot (impact + direction)."""
     plt.figure()
     shap.plots.beeswarm(shap_values, max_display=max_display, show=False)
-    plt.title("SHAP Beeswarm: Feature Impact on Predicted ADR", fontsize=12, fontweight="bold")
+    plt.title("SHAP Summary: Feature Impact on Predicted ADR", fontsize=12, fontweight="bold")
     plt.tight_layout()
-    out = save_path / "12_shap_beeswarm.png"
-    plt.savefig(out, dpi=300, bbox_inches="tight")
+    out = save_path / "shap_summary.png"
+    plt.savefig(out, dpi=200, bbox_inches="tight")
     plt.close()
     return out
